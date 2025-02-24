@@ -1,7 +1,7 @@
 import { createArvoContract } from 'arvo-core';
-import { ArvoMcpToolsetContractVersionRecord, ArvoMcpToolsetContract } from './types';
-import { ArvoMcpEventTypeGen } from '../../typegen';
 import { z } from 'zod';
+import { ArvoMcpEventTypeGen } from '../../typegen';
+import type { ArvoMcpToolsetContract, ArvoMcpToolsetContractVersionRecord } from './types';
 
 /**
  * Creates a contract that defines a toolset - a collection of related tools that work together
@@ -25,7 +25,6 @@ import { z } from 'zod';
  *   name: "document.processing", // -> type = arvo.mcp.tools.document.processing
  *   versions: {
  *     "1.0.0": {
- *       tools: {
  *         extract: {
  *           description: "Extracts text from documents",
  *           accepts: z.object({ document: z.string() }),
@@ -36,7 +35,6 @@ import { z } from 'zod';
  *           accepts: z.object({ text: z.string() }),
  *           emits: z.object({ summary: z.string() })
  *         }
- *       }
  *     }
  *   }
  * });
@@ -64,11 +62,11 @@ export const createArvoMcpToolsetContract = <
         version,
         {
           accepts: z
-            .object(Object.fromEntries(Object.entries(item.tools).map(([tool, { accepts }]) => [tool, accepts])))
+            .object(Object.fromEntries(Object.entries(item).map(([tool, { accepts }]) => [tool, accepts])))
             .partial(),
           emits: {
             [ArvoMcpEventTypeGen.tools.complete(param.name)]: z
-              .object(Object.fromEntries(Object.entries(item.tools).map(([tool, { emits }]) => [tool, emits])))
+              .object(Object.fromEntries(Object.entries(item).map(([tool, { emits }]) => [tool, emits])))
               .partial(),
           },
         },
@@ -76,7 +74,7 @@ export const createArvoMcpToolsetContract = <
     ),
     metadata: {
       ...(param.metadata ?? {}),
-      contractType: 'ArvoMcpToolContract' as const,
+      contractType: 'ArvoMcpToolsetContract' as const,
       rootType: param.name,
       initEventType: ArvoMcpEventTypeGen.tools.init(param.name),
       completeEventType: ArvoMcpEventTypeGen.tools.complete(param.name),

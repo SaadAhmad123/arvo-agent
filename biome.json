@@ -14,7 +14,8 @@
       "**/coverage/**",
       "**/.next/**",
       "**/public/**",
-      "**/out/**"
+      "**/out/**",
+      "**/docs/**"
     ]
   },
   "formatter": {

@@ -1,6 +1,6 @@
-import { type ArvoContract, type ArvoSemanticVersion } from 'arvo-core';
-import { z } from 'zod';
-import { ArvoMcpEventTypeGen } from '../../typegen';
+import type { ArvoContract, ArvoSemanticVersion } from 'arvo-core';
+import type { z } from 'zod';
+import type { ArvoMcpEventTypeGen } from '../../typegen';
 
 /**
  * Defines the structure of tool collections within a service boundary.
@@ -17,16 +17,14 @@ import { ArvoMcpEventTypeGen } from '../../typegen';
  */
 export type ArvoMcpToolsetContractVersionRecord = Record<
   ArvoSemanticVersion,
-  {
-    tools: Record<
-      string,
-      {
-        description: string;
-        accepts: z.ZodTypeAny;
-        emits: z.ZodTypeAny;
-      }
-    >;
-  }
+  Record<
+    string,
+    {
+      description: string;
+      accepts: z.ZodTypeAny;
+      emits: z.ZodTypeAny;
+    }
+  >
 >;
 
 /**
@@ -46,11 +44,11 @@ export type ArvoMcpToolsetContract<
   {
     [V in ArvoSemanticVersion & keyof TVersions]: {
       accepts: z.ZodObject<{
-        [K in keyof TVersions[V]['tools']]: z.ZodOptional<TVersions[V]['tools'][K]['accepts']>;
+        [K in keyof TVersions[V]]: z.ZodOptional<TVersions[V][K]['accepts']>;
       }>;
       emits: {
         [K in ReturnType<typeof ArvoMcpEventTypeGen.tools.complete<TName>>]: z.ZodObject<{
-          [T in keyof TVersions[V]['tools']]: z.ZodOptional<TVersions[V]['tools'][T]['emits']>;
+          [T in keyof TVersions[V]]: z.ZodOptional<TVersions[V][T]['emits']>;
         }>;
       };
     };

@@ -1,4 +1,3 @@
-'use strict';
 window.translations = {
   copy: 'Copy',
   copied: 'Copied!',
@@ -15,7 +14,7 @@ window.translations = {
   var Fe = (t, e) => () => (e || t((e = { exports: {} }).exports, e), e.exports);
   var De = (t, e, n, r) => {
     if ((e && typeof e == 'object') || typeof e == 'function')
-      for (let i of _e(e))
+      for (const i of _e(e))
         !Me.call(t, i) && i !== n && ie(t, i, { get: () => e[i], enumerable: !(r = Oe(e, i)) || r.enumerable });
     return t;
   };
@@ -25,7 +24,7 @@ window.translations = {
   );
   var ue = Fe((ae, le) => {
     (function () {
-      var t = function (e) {
+      var t = (e) => {
         var n = new t.Builder();
         return (
           n.pipeline.add(t.trimmer, t.stopWordFilter, t.stemmer),
@@ -36,15 +35,11 @@ window.translations = {
       };
       t.version = '2.3.9';
       (t.utils = {}),
-        (t.utils.warn = (function (e) {
-          return function (n) {
-            e.console && console.warn && console.warn(n);
-          };
+        (t.utils.warn = ((e) => (n) => {
+          e.console && console.warn && console.warn(n);
         })(this)),
-        (t.utils.asString = function (e) {
-          return e == null ? '' : e.toString();
-        }),
-        (t.utils.clone = function (e) {
+        (t.utils.asString = (e) => (e == null ? '' : e.toString())),
+        (t.utils.clone = (e) => {
           if (e == null) return e;
           for (var n = Object.create(null), r = Object.keys(e), i = 0; i < r.length; i++) {
             var s = r[i],
@@ -65,7 +60,7 @@ window.translations = {
           (this.docRef = e), (this.fieldName = n), (this._stringValue = r);
         }),
         (t.FieldRef.joiner = '/'),
-        (t.FieldRef.fromString = function (e) {
+        (t.FieldRef.fromString = (e) => {
           var n = e.indexOf(t.FieldRef.joiner);
           if (n === -1) throw 'malformed field ref string';
           var r = e.slice(0, n),
@@ -85,26 +80,18 @@ window.translations = {
         } else this.length = 0;
       }),
         (t.Set.complete = {
-          intersect: function (e) {
-            return e;
-          },
+          intersect: (e) => e,
           union: function () {
             return this;
           },
-          contains: function () {
-            return !0;
-          },
+          contains: () => !0,
         }),
         (t.Set.empty = {
           intersect: function () {
             return this;
           },
-          union: function (e) {
-            return e;
-          },
-          contains: function () {
-            return !1;
-          },
+          union: (e) => e,
+          contains: () => !1,
         }),
         (t.Set.prototype.contains = function (e) {
           return !!this.elements[e];
@@ -130,7 +117,7 @@ window.translations = {
               ? this
               : new t.Set(Object.keys(this.elements).concat(Object.keys(e.elements)));
         }),
-        (t.idf = function (e, n) {
+        (t.idf = (e, n) => {
           var r = 0;
           for (var i in e) i != '_index' && (r += Object.keys(e[i]).length);
           var s = (n - r + 0.5) / (r + 0.5);
@@ -146,21 +133,11 @@ window.translations = {
           return (this.str = e(this.str, this.metadata)), this;
         }),
         (t.Token.prototype.clone = function (e) {
-          return (
-            (e =
-              e ||
-              function (n) {
-                return n;
-              }),
-            new t.Token(e(this.str, this.metadata), this.metadata)
-          );
+          return (e = e || ((n) => n)), new t.Token(e(this.str, this.metadata), this.metadata);
         });
-      (t.tokenizer = function (e, n) {
+      (t.tokenizer = (e, n) => {
         if (e == null || e == null) return [];
-        if (Array.isArray(e))
-          return e.map(function (m) {
-            return new t.Token(t.utils.asString(m).toLowerCase(), t.utils.clone(n));
-          });
+        if (Array.isArray(e)) return e.map((m) => new t.Token(t.utils.asString(m).toLowerCase(), t.utils.clone(n)));
         for (var r = e.toString().toLowerCase(), i = r.length, s = [], o = 0, a = 0; o <= i; o++) {
           var l = r.charAt(o),
             u = o - a;
@@ -193,10 +170,10 @@ window.translations = {
               e,
             );
         }),
-        (t.Pipeline.load = function (e) {
+        (t.Pipeline.load = (e) => {
           var n = new t.Pipeline();
           return (
-            e.forEach(function (r) {
+            e.forEach((r) => {
               var i = t.Pipeline.registeredFunctions[r];
               if (i) n.add(i);
               else throw new Error('Cannot load unregistered function: ' + r);
@@ -240,17 +217,13 @@ window.translations = {
         }),
         (t.Pipeline.prototype.runString = function (e, n) {
           var r = new t.Token(e, n);
-          return this.run([r]).map(function (i) {
-            return i.toString();
-          });
+          return this.run([r]).map((i) => i.toString());
         }),
         (t.Pipeline.prototype.reset = function () {
           this._stack = [];
         }),
         (t.Pipeline.prototype.toJSON = function () {
-          return this._stack.map(function (e) {
-            return t.Pipeline.warnIfFunctionNotRegistered(e), e.label;
-          });
+          return this._stack.map((e) => (t.Pipeline.warnIfFunctionNotRegistered(e), e.label));
         });
       (t.Vector = function (e) {
         (this._magnitude = 0), (this.elements = e || []);
@@ -266,7 +239,7 @@ window.translations = {
           if (o < e) return (s + 1) * 2;
         }),
         (t.Vector.prototype.insert = function (e, n) {
-          this.upsert(e, n, function () {
+          this.upsert(e, n, () => {
             throw 'duplicate index';
           });
         }),
@@ -306,7 +279,7 @@ window.translations = {
         (t.Vector.prototype.toJSON = function () {
           return this.elements;
         });
-      (t.stemmer = (function () {
+      (t.stemmer = (() => {
         var e = {
             ational: 'ate',
             tional: 'tion',
@@ -349,7 +322,7 @@ window.translations = {
           S = /^(.+?)(ed|ing)$/,
           w = /.$/,
           k = /(at|bl|iz)$/,
-          _ = new RegExp('([^aeiouylsz])\\1$'),
+          _ = /([^aeiouylsz])\1$/,
           B = new RegExp('^' + s + i + '[^aeiouwxy]$'),
           A = /^(.+?[^aeiou])y$/,
           j =
@@ -360,7 +333,7 @@ window.translations = {
           C = /^(.+?)e$/,
           z = /ll$/,
           W = new RegExp('^' + s + i + '[^aeiouwxy]$'),
-          H = function (c) {
+          H = (c) => {
             var v, P, T, h, x, O, M;
             if (c.length < 3) return c;
             if (
@@ -421,16 +394,12 @@ window.translations = {
               c
             );
           };
-        return function (R) {
-          return R.update(H);
-        };
+        return (R) => R.update(H);
       })()),
         t.Pipeline.registerFunction(t.stemmer, 'stemmer');
-      (t.generateStopWordFilter = function (e) {
-        var n = e.reduce(function (r, i) {
-          return (r[i] = i), r;
-        }, {});
-        return function (r) {
+      (t.generateStopWordFilter = (e) => {
+        var n = e.reduce((r, i) => ((r[i] = i), r), {});
+        return (r) => {
           if (r && n[r.toString()] !== r.toString()) return r;
         };
       }),
@@ -556,26 +525,19 @@ window.translations = {
           'your',
         ])),
         t.Pipeline.registerFunction(t.stopWordFilter, 'stopWordFilter');
-      (t.trimmer = function (e) {
-        return e.update(function (n) {
-          return n.replace(/^\W+/, '').replace(/\W+$/, '');
-        });
-      }),
+      (t.trimmer = (e) => e.update((n) => n.replace(/^\W+/, '').replace(/\W+$/, ''))),
         t.Pipeline.registerFunction(t.trimmer, 'trimmer');
       (t.TokenSet = function () {
         (this.final = !1), (this.edges = {}), (this.id = t.TokenSet._nextId), (t.TokenSet._nextId += 1);
       }),
         (t.TokenSet._nextId = 1),
-        (t.TokenSet.fromArray = function (e) {
+        (t.TokenSet.fromArray = (e) => {
           for (var n = new t.TokenSet.Builder(), r = 0, i = e.length; r < i; r++) n.insert(e[r]);
           return n.finish(), n.root;
         }),
-        (t.TokenSet.fromClause = function (e) {
-          return 'editDistance' in e
-            ? t.TokenSet.fromFuzzyString(e.term, e.editDistance)
-            : t.TokenSet.fromString(e.term);
-        }),
-        (t.TokenSet.fromFuzzyString = function (e, n) {
+        (t.TokenSet.fromClause = (e) =>
+          'editDistance' in e ? t.TokenSet.fromFuzzyString(e.term, e.editDistance) : t.TokenSet.fromString(e.term)),
+        (t.TokenSet.fromFuzzyString = (e, n) => {
           for (var r = new t.TokenSet(), i = [{ node: r, editsRemaining: n, str: e }]; i.length; ) {
             var s = i.pop();
             if (s.str.length > 0) {
@@ -618,7 +580,7 @@ window.translations = {
           }
           return r;
         }),
-        (t.TokenSet.fromString = function (e) {
+        (t.TokenSet.fromString = (e) => {
           for (var n = new t.TokenSet(), r = n, i = 0, s = e.length; i < s; i++) {
             var o = e[i],
               a = i == s - 1;
@@ -719,7 +681,7 @@ window.translations = {
           (this.pipeline = e.pipeline);
       }),
         (t.Index.prototype.search = function (e) {
-          return this.query(function (n) {
+          return this.query((n) => {
             var r = new t.QueryParser(e, n);
             r.parse();
           });
@@ -770,12 +732,7 @@ window.translations = {
                     a[y] === void 0 && (a[y] = t.Set.empty), (a[y] = a[y].union(q));
                     continue;
                   }
-                  if (
-                    (i[y].upsert(_, u.boost, function (Ie, Ce) {
-                      return Ie + Ce;
-                    }),
-                    !s[j])
-                  ) {
+                  if ((i[y].upsert(_, u.boost, (Ie, Ce) => Ie + Ce), !s[j])) {
                     for (var V = 0; V < A.length; V++) {
                       var $ = A[V],
                         C = new t.FieldRef($, y),
@@ -822,9 +779,7 @@ window.translations = {
               }
             }
           }
-          return v.sort(function (ke, Qe) {
-            return Qe.score - ke.score;
-          });
+          return v.sort((ke, Qe) => Qe.score - ke.score);
         }),
         (t.Index.prototype.toJSON = function () {
           var e = Object.keys(this.invertedIndex)
@@ -843,7 +798,7 @@ window.translations = {
             pipeline: this.pipeline.toJSON(),
           };
         }),
-        (t.Index.load = function (e) {
+        (t.Index.load = (e) => {
           var n = {},
             r = {},
             i = e.fieldVectors,
@@ -1150,24 +1105,22 @@ window.translations = {
         (t.QueryLexer.EDIT_DISTANCE = 'EDIT_DISTANCE'),
         (t.QueryLexer.BOOST = 'BOOST'),
         (t.QueryLexer.PRESENCE = 'PRESENCE'),
-        (t.QueryLexer.lexField = function (e) {
-          return e.backup(), e.emit(t.QueryLexer.FIELD), e.ignore(), t.QueryLexer.lexText;
-        }),
-        (t.QueryLexer.lexTerm = function (e) {
+        (t.QueryLexer.lexField = (e) => (e.backup(), e.emit(t.QueryLexer.FIELD), e.ignore(), t.QueryLexer.lexText)),
+        (t.QueryLexer.lexTerm = (e) => {
           if ((e.width() > 1 && (e.backup(), e.emit(t.QueryLexer.TERM)), e.ignore(), e.more()))
             return t.QueryLexer.lexText;
         }),
-        (t.QueryLexer.lexEditDistance = function (e) {
-          return e.ignore(), e.acceptDigitRun(), e.emit(t.QueryLexer.EDIT_DISTANCE), t.QueryLexer.lexText;
-        }),
-        (t.QueryLexer.lexBoost = function (e) {
-          return e.ignore(), e.acceptDigitRun(), e.emit(t.QueryLexer.BOOST), t.QueryLexer.lexText;
-        }),
-        (t.QueryLexer.lexEOS = function (e) {
+        (t.QueryLexer.lexEditDistance = (e) => (
+          e.ignore(), e.acceptDigitRun(), e.emit(t.QueryLexer.EDIT_DISTANCE), t.QueryLexer.lexText
+        )),
+        (t.QueryLexer.lexBoost = (e) => (
+          e.ignore(), e.acceptDigitRun(), e.emit(t.QueryLexer.BOOST), t.QueryLexer.lexText
+        )),
+        (t.QueryLexer.lexEOS = (e) => {
           e.width() > 0 && e.emit(t.QueryLexer.TERM);
         }),
         (t.QueryLexer.termSeparator = t.tokenizer.separator),
-        (t.QueryLexer.lexText = function (e) {
+        (t.QueryLexer.lexText = (e) => {
           for (;;) {
             var n = e.next();
             if (n == t.QueryLexer.EOS) return t.QueryLexer.lexEOS;
@@ -1202,7 +1155,7 @@ window.translations = {
           var e = this.currentClause;
           this.query.clause(e), (this.currentClause = {});
         }),
-        (t.QueryParser.parseClause = function (e) {
+        (t.QueryParser.parseClause = (e) => {
           var n = e.peekLexeme();
           if (n != null)
             switch (n.type) {
@@ -1219,7 +1172,7 @@ window.translations = {
                 );
             }
         }),
-        (t.QueryParser.parsePresence = function (e) {
+        (t.QueryParser.parsePresence = (e) => {
           var n = e.consumeLexeme();
           if (n != null) {
             switch (n.str) {
@@ -1249,15 +1202,11 @@ window.translations = {
             }
           }
         }),
-        (t.QueryParser.parseField = function (e) {
+        (t.QueryParser.parseField = (e) => {
           var n = e.consumeLexeme();
           if (n != null) {
             if (e.query.allFields.indexOf(n.str) == -1) {
-              var r = e.query.allFields
-                  .map(function (o) {
-                    return "'" + o + "'";
-                  })
-                  .join(', '),
+              var r = e.query.allFields.map((o) => "'" + o + "'").join(', '),
                 i = "unrecognised field '" + n.str + "', possible fields: " + r;
               throw new t.QueryParseError(i, n.start, n.end);
             }
@@ -1276,7 +1225,7 @@ window.translations = {
             }
           }
         }),
-        (t.QueryParser.parseTerm = function (e) {
+        (t.QueryParser.parseTerm = (e) => {
           var n = e.consumeLexeme();
           if (n != null) {
             (e.currentClause.term = n.str.toLowerCase()),
@@ -1303,10 +1252,10 @@ window.translations = {
             }
           }
         }),
-        (t.QueryParser.parseEditDistance = function (e) {
+        (t.QueryParser.parseEditDistance = (e) => {
           var n = e.consumeLexeme();
           if (n != null) {
-            var r = parseInt(n.str, 10);
+            var r = Number.parseInt(n.str, 10);
             if (isNaN(r)) {
               var i = 'edit distance must be numeric';
               throw new t.QueryParseError(i, n.start, n.end);
@@ -1334,10 +1283,10 @@ window.translations = {
             }
           }
         }),
-        (t.QueryParser.parseBoost = function (e) {
+        (t.QueryParser.parseBoost = (e) => {
           var n = e.consumeLexeme();
           if (n != null) {
-            var r = parseInt(n.str, 10);
+            var r = Number.parseInt(n.str, 10);
             if (isNaN(r)) {
               var i = 'boost must be numeric';
               throw new t.QueryParseError(i, n.start, n.end);
@@ -1365,15 +1314,13 @@ window.translations = {
             }
           }
         }),
-        (function (e, n) {
+        ((e, n) => {
           typeof define == 'function' && define.amd
             ? define(n)
             : typeof ae == 'object'
               ? (le.exports = n())
               : (e.lunr = n());
-        })(this, function () {
-          return t;
-        });
+        })(this, () => t);
     })();
   });
   var se = [];
@@ -1409,7 +1356,7 @@ window.translations = {
     }
     scrollToHash() {
       if (location.hash) {
-        let e = document.getElementById(location.hash.substring(1));
+        const e = document.getElementById(location.hash.substring(1));
         if (!e) return;
         e.scrollIntoView({ behavior: 'instant', block: 'start' });
       }
@@ -1417,20 +1364,20 @@ window.translations = {
     ensureActivePageVisible() {
       let e = document.querySelector('.tsd-navigation .current'),
         n = e?.parentElement;
-      for (; n && !n.classList.contains('.tsd-navigation'); )
+      while (n && !n.classList.contains('.tsd-navigation'))
         n instanceof HTMLDetailsElement && (n.open = !0), (n = n.parentElement);
       if (e && !Ve(e)) {
-        let r = e.getBoundingClientRect().top - document.documentElement.clientHeight / 4;
+        const r = e.getBoundingClientRect().top - document.documentElement.clientHeight / 4;
         (document.querySelector('.site-menu').scrollTop = r), (document.querySelector('.col-sidebar').scrollTop = r);
       }
     }
     updateIndexVisibility() {
-      let e = document.querySelector('.tsd-index-content'),
+      const e = document.querySelector('.tsd-index-content'),
         n = e?.open;
       e && (e.open = !0),
         document.querySelectorAll('.tsd-index-section').forEach((r) => {
           r.style.display = 'block';
-          let i = Array.from(r.querySelectorAll('.tsd-index-link')).every((s) => s.offsetParent == null);
+          const i = Array.from(r.querySelectorAll('.tsd-index-link')).every((s) => s.offsetParent == null);
           r.style.display = i ? 'none' : 'block';
         }),
         e && (e.open = n);
@@ -1444,17 +1391,17 @@ window.translations = {
         !location.hash)
       )
         return;
-      let e = document.getElementById(location.hash.substring(1));
+      const e = document.getElementById(location.hash.substring(1));
       if (!e) return;
       let n = e.parentElement;
-      for (; n && n.tagName !== 'SECTION'; ) n = n.parentElement;
+      while (n && n.tagName !== 'SECTION') n = n.parentElement;
       if (!n) return;
       let r = n.offsetParent == null,
         i = n;
-      for (; i !== document.body; ) i instanceof HTMLDetailsElement && (i.open = !0), (i = i.parentElement);
+      while (i !== document.body) i instanceof HTMLDetailsElement && (i.open = !0), (i = i.parentElement);
       if (n.offsetParent == null) {
         (this.alwaysVisibleMember = n), n.classList.add('always-visible');
-        let s = document.createElement('p');
+        const s = document.createElement('p');
         s.classList.add('warning'), (s.textContent = window.translations.normally_hidden), n.prepend(s);
       }
       r && e.scrollIntoView();
@@ -1479,7 +1426,7 @@ window.translations = {
     }
   };
   function Ve(t) {
-    let e = t.getBoundingClientRect(),
+    const e = t.getBoundingClientRect(),
       n = Math.max(document.documentElement.clientHeight, window.innerHeight);
     return !(e.bottom < 0 || e.top - n >= 0);
   }
@@ -1492,15 +1439,15 @@ window.translations = {
   var pe = Ae(ue());
   async function ce(t, e) {
     if (!window.searchData) return;
-    let n = await fetch(window.searchData),
+    const n = await fetch(window.searchData),
       r = new Blob([await n.arrayBuffer()]).stream().pipeThrough(new DecompressionStream('gzip')),
       i = await new Response(r).json();
     (t.data = i), (t.index = pe.Index.load(i.index)), e.classList.remove('loading'), e.classList.add('ready');
   }
   function fe() {
-    let t = document.getElementById('tsd-search');
+    const t = document.getElementById('tsd-search');
     if (!t) return;
-    let e = { base: t.dataset.base + '/' },
+    const e = { base: t.dataset.base + '/' },
       n = document.getElementById('tsd-search-script');
     t.classList.add('loading'),
       n &&
@@ -1511,7 +1458,7 @@ window.translations = {
           ce(e, t);
         }),
         ce(e, t));
-    let r = document.querySelector('#tsd-search input'),
+    const r = document.querySelector('#tsd-search input'),
       i = document.querySelector('#tsd-search .results');
     if (!r || !i) throw new Error('The input field or the result list wrapper was not found');
     i.addEventListener('mouseup', () => {
@@ -1555,7 +1502,7 @@ window.translations = {
     let i = n.value.trim(),
       s;
     if (i) {
-      let o = i
+      const o = i
         .split(' ')
         .map((a) => (a.length ? `*${a}*` : ''))
         .join(' ');
@@ -1569,9 +1516,9 @@ window.translations = {
         (a.score *= u);
     }
     if (s.length === 0) {
-      let o = document.createElement('li');
+      const o = document.createElement('li');
       o.classList.add('no-results');
-      let a = document.createElement('span');
+      const a = document.createElement('span');
       (a.textContent = 'No results found'), o.appendChild(a), e.appendChild(o);
     }
     s.sort((o, a) => a.score - o.score);
@@ -1583,9 +1530,9 @@ window.translations = {
         l.parent &&
           (d = `<span class="parent">
                 ${he(l.parent, i)}.</span>${d}`);
-      let m = document.createElement('li');
+      const m = document.createElement('li');
       m.classList.value = l.classes ?? '';
-      let p = document.createElement('a');
+      const p = document.createElement('a');
       (p.href = r.base + l.url),
         (p.innerHTML = u + d),
         m.append(p),
@@ -1614,7 +1561,7 @@ window.translations = {
   function Be(t, e) {
     let n = t.querySelector('.current');
     if ((n || (n = t.querySelector('li:first-child')), n)) {
-      let r = n.querySelector('a');
+      const r = n.querySelector('a');
       r && (window.location.href = r.href), te(e);
     }
   }
@@ -1625,7 +1572,7 @@ window.translations = {
       i = [],
       s = 0,
       o = n.indexOf(r);
-    for (; o != -1; )
+    while (o != -1)
       i.push(ee(t.substring(s, o)), `<b>${ee(t.substring(o, o + r.length))}</b>`),
         (s = o + r.length),
         (o = n.indexOf(r, s));
@@ -1655,12 +1602,12 @@ window.translations = {
     ((qe = !0), (F = 'touchstart'), (ye = 'touchmove'), (N = 'touchend'));
   document.addEventListener(F, (t) => {
     (ne = !0), (D = !1);
-    let e = F == 'touchstart' ? t.targetTouches[0] : t;
+    const e = F == 'touchstart' ? t.targetTouches[0] : t;
     (J.y = e.pageY || 0), (J.x = e.pageX || 0);
   });
   document.addEventListener(ye, (t) => {
     if (ne && !D) {
-      let e = F == 'touchstart' ? t.targetTouches[0] : t,
+      const e = F == 'touchstart' ? t.targetTouches[0] : t,
         n = J.x - (e.pageX || 0),
         r = J.y - (e.pageY || 0);
       D = Math.sqrt(n * n + r * r) > 10;
@@ -1686,7 +1633,7 @@ window.translations = {
       (this.active = e),
         document.documentElement.classList.toggle('has-' + this.className, e),
         this.el.classList.toggle('active', e);
-      let n = (this.active ? 'to-has-' : 'from-has-') + this.className;
+      const n = (this.active ? 'to-has-' : 'from-has-') + this.className;
       document.documentElement.classList.add(n), setTimeout(() => document.documentElement.classList.remove(n), 500);
     }
     onPointerUp(e) {
@@ -1700,7 +1647,7 @@ window.translations = {
     }
     onDocumentPointerUp(e) {
       if (!D && this.active && e.target.closest('.col-sidebar')) {
-        let n = e.target.closest('a');
+        const n = e.target.closest('a');
         if (n) {
           let r = window.location.href;
           r.indexOf('#') != -1 && (r = r.substring(0, r.indexOf('#'))),
@@ -1737,7 +1684,7 @@ window.translations = {
         this.app.updateIndexVisibility();
     }
     fromLocalStorage() {
-      let e = Q.getItem(this.key);
+      const e = Q.getItem(this.key);
       return e ? e === 'true' : this.el.checked;
     }
     setLocalStorage(e) {
@@ -1756,9 +1703,9 @@ window.translations = {
         (this.summary = this.el.querySelector('.tsd-accordion-summary')),
         (this.icon = this.summary.querySelector('svg')),
         (this.key = `tsd-accordion-${this.summary.dataset.key ?? this.summary.textContent.trim().replace(/\s+/g, '-').toLowerCase()}`);
-      let n = Q.getItem(this.key);
+      const n = Q.getItem(this.key);
       (this.el.open = n ? n === 'true' : this.el.open), this.el.addEventListener('toggle', () => this.update());
-      let r = this.summary.querySelector('a');
+      const r = this.summary.querySelector('a');
       r &&
         r.addEventListener('click', () => {
           location.assign(r.href);
@@ -1771,7 +1718,7 @@ window.translations = {
     }
   };
   function Ee(t) {
-    let e = Q.getItem('tsd-theme') || 'os';
+    const e = Q.getItem('tsd-theme') || 'os';
     (t.value = e),
       xe(e),
       t.addEventListener('change', () => {
@@ -1783,41 +1730,41 @@ window.translations = {
   }
   var K;
   function we() {
-    let t = document.getElementById('tsd-nav-script');
+    const t = document.getElementById('tsd-nav-script');
     t && (t.addEventListener('load', Le), Le());
   }
   async function Le() {
-    let t = document.getElementById('tsd-nav-container');
+    const t = document.getElementById('tsd-nav-container');
     if (!t || !window.navigationData) return;
-    let n = await (await fetch(window.navigationData)).arrayBuffer(),
+    const n = await (await fetch(window.navigationData)).arrayBuffer(),
       r = new Blob([n]).stream().pipeThrough(new DecompressionStream('gzip')),
       i = await new Response(r).json();
     (K = t.dataset.base), K.endsWith('/') || (K += '/'), (t.innerHTML = '');
-    for (let s of i) Se(s, t, []);
+    for (const s of i) Se(s, t, []);
     window.app.createComponents(t), window.app.showPage(), window.app.ensureActivePageVisible();
   }
   function Se(t, e, n) {
-    let r = e.appendChild(document.createElement('li'));
+    const r = e.appendChild(document.createElement('li'));
     if (t.children) {
-      let i = [...n, t.text],
+      const i = [...n, t.text],
         s = r.appendChild(document.createElement('details'));
       s.className = t.class ? `${t.class} tsd-accordion` : 'tsd-accordion';
-      let o = s.appendChild(document.createElement('summary'));
+      const o = s.appendChild(document.createElement('summary'));
       (o.className = 'tsd-accordion-summary'),
         (o.dataset.key = i.join('$')),
         (o.innerHTML =
           '<svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>'),
         be(t, o);
-      let a = s.appendChild(document.createElement('div'));
+      const a = s.appendChild(document.createElement('div'));
       a.className = 'tsd-accordion-details';
-      let l = a.appendChild(document.createElement('ul'));
+      const l = a.appendChild(document.createElement('ul'));
       l.className = 'tsd-nested-navigation';
-      for (let u of t.children) Se(u, l, i);
+      for (const u of t.children) Se(u, l, i);
     } else be(t, r, t.class);
   }
   function be(t, e, n) {
     if (t.path) {
-      let r = e.appendChild(document.createElement('a'));
+      const r = e.appendChild(document.createElement('a'));
       (r.href = K + t.path),
         n && (r.className = n),
         location.pathname === r.pathname && !r.href.includes('#') && r.classList.add('current'),
@@ -1825,7 +1772,7 @@ window.translations = {
           (r.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="tsd-kind-icon"><use href="#icon-${t.kind}"></use></svg>`),
         (r.appendChild(document.createElement('span')).textContent = t.text);
     } else {
-      let r = e.appendChild(document.createElement('span'));
+      const r = e.appendChild(document.createElement('span'));
       (r.innerHTML =
         '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="tsd-kind-icon"><use href="#icon-folder"></use></svg>'),
         (r.appendChild(document.createElement('span')).textContent = t.text);

@@ -1,7 +1,7 @@
 /**
  * Base prefix for all MCP (Model Context Protocol) compliant event types
  */
-const prefix = `arvo.mcp` as const;
+const prefix = 'arvo.mcp' as const;
 
 const generateMcpTypeGen = <T extends string>(name: T) => {
   const _prefix = `${prefix}.${name}` as const;
