@@ -24,7 +24,6 @@ describe('ArvoMcpToolsetContract', () => {
 
   it('should define the toolset contract', () => {
     const testContract = createTestContract();
-
     expect(testContract.metadata.contractType).toBe('ArvoMcpToolsetContract');
     expect(testContract.version('1.0.0').dataschema).toBe('#/mcp/test/test/1.0.0');
     expect(testContract.version('1.0.0').accepts.type).toBe('arvo.mcp.tools.policy.rag');
@@ -111,22 +110,22 @@ describe('ArvoMcpToolsetContract', () => {
         'get-weather': {
           temperature: 12,
         },
-      }
+      },
     });
     expect(toolEvent.type).toBe('arvo.mcp.tools.policy.rag.done');
     expect(toolEvent.dataschema).toBe('#/mcp/test/test/1.0.0');
     expect(toolEvent.data['get-weather']?.temperature).toBe(12);
     expect(toolEvent.data['celcius-to-kelvin']?.kelvin).toBeUndefined();
-  })
+  });
 
   it('should create a error event', () => {
     const testContract = createTestContract();
     const toolEvent = createArvoEventFactory(testContract.version('1.0.0')).systemError({
       source: 'com.test.test',
-      error: new Error("Something went wrong")
+      error: new Error('Something went wrong'),
     });
     expect(toolEvent.type).toBe('sys.arvo.mcp.tools.policy.rag.error');
     expect(toolEvent.dataschema).toBe('#/mcp/test/test/0.0.0');
-    expect(toolEvent.data.errorName).toBe('Something went wrong');
-  })
+    expect(toolEvent.data.errorMessage).toBe('Something went wrong');
+  });
 });
