@@ -13,7 +13,19 @@
     "format": "biome format --fix",
     "doc": "npx typedoc"
   },
-  "keywords": ["arvo", "event-driven architecture", "xorca", "core", "cloudevent", "opentelemetry", "orchestrator", "agent", "agentic architecture", "mcp", "model context protocol"],
+  "keywords": [
+    "arvo",
+    "event-driven architecture",
+    "xorca",
+    "core",
+    "cloudevent",
+    "opentelemetry",
+    "orchestrator",
+    "agent",
+    "agentic architecture",
+    "mcp",
+    "model context protocol"
+  ],
   "author": "Saad Ahmad <saadkwi12@hotmail.com>",
   "license": "MIT",
   "devDependencies": {
