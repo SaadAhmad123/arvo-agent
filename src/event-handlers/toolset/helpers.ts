@@ -1,17 +1,14 @@
-import { ArvoMcpToolsetHandler } from './index';
-import type { ArvoMcpToolsetContract } from '../../contracts';
-import type { IArvoMcpToolsetHandler } from './types';
+import { ArvoAgentToolsetHandler } from './index';
+import type { ArvoAgentToolsetContract } from '../../contracts';
+import type { IArvoAgentToolsetHandler } from './types';
 
 /**
- * Creates a new ArvoMcpToolsetHandler instance with a simplified factory pattern.
- * This factory function provides a convenient way to create toolset handlers
- * that can operate in both Arvo's event-driven system and MCP environments.
- *
+ * Creates a new ArvoAgentToolsetHandler instance with a simplified factory pattern.
  * The handler can be created using either the Tool Handler or Event Handler pattern:
  *
  * @example Tool Handler Pattern - Direct tool implementation with type safety
  * ```typescript
- * const documentHandler = createArvoMcpToolsetHandler({
+ * const documentHandler = createArvoAgentToolsetHandler({
  *   contract: documentContract,
  *   executionunits: 1,
  *   handler: {
@@ -29,7 +26,7 @@ import type { IArvoMcpToolsetHandler } from './types';
  *
  * @example Event Handler Pattern - Custom event processing
  * ```typescript
- * const documentHandler = createArvoMcpToolsetHandler({
+ * const documentHandler = createArvoAgentToolsetHandler({
  *   contract: documentContract,
  *   executionunits: 1,
  *   handler: {
@@ -44,8 +41,8 @@ import type { IArvoMcpToolsetHandler } from './types';
  * @template TContract - The toolset contract type that defines the tools' interfaces
  * @param param - Configuration object for the handler including contract,
  *                implementation, execution units, and optional monitoring settings
- * @returns A new instance of ArvoMcpToolsetHandler configured with the provided parameters
+ * @returns A new instance of ArvoAgentToolsetHandler configured with the provided parameters
  */
-export const createArvoMcpToolsetHandler = <TContract extends ArvoMcpToolsetContract>(
-  param: IArvoMcpToolsetHandler<TContract>,
-) => new ArvoMcpToolsetHandler<TContract>(param);
+export const createArvoAgentToolsetHandler = <TContract extends ArvoAgentToolsetContract>(
+  param: IArvoAgentToolsetHandler<TContract>,
+) => new ArvoAgentToolsetHandler<TContract>(param);

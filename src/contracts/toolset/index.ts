@@ -1,28 +1,21 @@
 import { createArvoContract } from 'arvo-core';
 import { z } from 'zod';
-import { ArvoMcpEventTypeGen } from '../../typegen';
-import type { ArvoMcpToolsetContract, ArvoMcpToolsetContractVersionRecord } from './types';
+import { ArvoAgentEventTypeGen } from '../../typegen';
+import type { ArvoAgentToolsetContract, ArvoAgentToolsetContractVersionRecord } from './types';
 
 /**
  * Creates a contract that defines a toolset - a collection of related tools that work together
- * as a cohesive service boundary. The contract ensures these tools can operate both within
- * Arvo's event-driven architecture and in standard MCP environments.
+ * as a cohesive service boundary.
  *
  * A toolset represents a logical grouping of capabilities that belong together. For example,
  * a document processing toolset might include tools for text extraction, summarization, and
  * classification. While each tool is independent, they share context and evolve together.
  *
- * The contract provides:
- * - Type-safe boundaries between services through Arvo's contract system
- * - MCP compliance for tool interactions, enabling use outside Arvo
- * - Version management for graceful service evolution
- * - Clean separation between business logic and infrastructure
- *
  * @example
  * ```typescript
- * const documentTools = createArvoMcpToolsetContract({
- *   uri: "#/mcp/tools/document/processing/",
- *   name: "document.processing", // -> type = arvo.mcp.tools.document.processing
+ * const documentTools = createArvoAgentToolsetContract({
+ *   uri: "#/agent/tools/document/processing/",
+ *   name: "document.processing", // -> type = arvo.agent.toolset.document.processing
  *   versions: {
  *     "1.0.0": {
  *         extract: {
@@ -42,10 +35,10 @@ import type { ArvoMcpToolsetContract, ArvoMcpToolsetContractVersionRecord } from
  *
  * @returns A contract that defines the toolset's interface and behavior
  */
-export const createArvoMcpToolsetContract = <
+export const createArvoAgentToolsetContract = <
   TUri extends string = string,
   TName extends string = string,
-  TVersions extends ArvoMcpToolsetContractVersionRecord = ArvoMcpToolsetContractVersionRecord,
+  TVersions extends ArvoAgentToolsetContractVersionRecord = ArvoAgentToolsetContractVersionRecord,
   // biome-ignore lint/suspicious/noExplicitAny: Needs to be general
   TMetaData extends Record<string, any> = Record<string, any>,
 >(param: {
@@ -56,7 +49,7 @@ export const createArvoMcpToolsetContract = <
 }) =>
   createArvoContract({
     uri: param.uri,
-    type: ArvoMcpEventTypeGen.tools.init(param.name),
+    type: ArvoAgentEventTypeGen.toolset.init(param.name),
     versions: Object.fromEntries(
       Object.entries(param.versions).map(([version, item]) => [
         version,
@@ -65,7 +58,7 @@ export const createArvoMcpToolsetContract = <
             .object(Object.fromEntries(Object.entries(item).map(([tool, { accepts }]) => [tool, accepts])))
             .partial(),
           emits: {
-            [ArvoMcpEventTypeGen.tools.complete(param.name)]: z
+            [ArvoAgentEventTypeGen.toolset.complete(param.name)]: z
               .object(Object.fromEntries(Object.entries(item).map(([tool, { emits }]) => [tool, emits])))
               .partial(),
           },
@@ -74,10 +67,10 @@ export const createArvoMcpToolsetContract = <
     ),
     metadata: {
       ...(param.metadata ?? {}),
-      contractType: 'ArvoMcpToolsetContract' as const,
+      contractType: 'ArvoAgentToolsetContract' as const,
       rootType: param.name,
-      initEventType: ArvoMcpEventTypeGen.tools.init(param.name),
-      completeEventType: ArvoMcpEventTypeGen.tools.complete(param.name),
+      initEventType: ArvoAgentEventTypeGen.toolset.init(param.name),
+      completeEventType: ArvoAgentEventTypeGen.toolset.complete(param.name),
       versions: param.versions,
     },
-  }) as unknown as ArvoMcpToolsetContract<TUri, TName, TVersions, TMetaData>;
+  }) as unknown as ArvoAgentToolsetContract<TUri, TName, TVersions, TMetaData>;

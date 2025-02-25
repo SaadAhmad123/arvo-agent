@@ -1,2 +1,2 @@
-export { createArvoMcpToolsetContract } from './toolset';
-export { ArvoMcpToolsetContract } from './toolset/types';
+export { createArvoAgentToolsetContract } from './toolset';
+export { ArvoAgentToolsetContract } from './toolset/types';

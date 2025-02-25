@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { createArvoMcpToolsetContract, createArvoMcpToolsetHandler } from '../src';
+import { createArvoAgentToolsetContract, createArvoAgentToolsetHandler } from '../src';
 import { createArvoEventFactory } from 'arvo-core';
 import { ExecutionViolation } from 'arvo-event-handler';
 
-describe('ArvoMcpToolsetHandler', () => {
-  const testContract = createArvoMcpToolsetContract({
-    uri: '#/mcp/test/contract',
+describe('ArvoAgentToolsetHandler', () => {
+  const testContract = createArvoAgentToolsetContract({
+    uri: '#/agent/test/contract',
     name: 'test.tools',
     versions: {
       '1.0.0': {
@@ -24,7 +24,7 @@ describe('ArvoMcpToolsetHandler', () => {
   });
 
   describe('Tool Handler Pattern', () => {
-    const handler = createArvoMcpToolsetHandler({
+    const handler = createArvoAgentToolsetHandler({
       contract: testContract,
       executionunits: 1,
       handler: {
@@ -40,6 +40,17 @@ describe('ArvoMcpToolsetHandler', () => {
       },
     });
 
+    it('should process empty tool request', async () => {
+      const event = createArvoEventFactory(testContract.version('1.0.0')).accepts({
+        source: 'com.test.test',
+        data: {},
+      });
+
+      const result = await handler.execute(event);
+      expect(result[0].data).toEqual({});
+      expect(result[0].executionunits).toBe(1);
+    });
+
     it('should process single tool request', async () => {
       const event = createArvoEventFactory(testContract.version('1.0.0')).accepts({
         source: 'com.test.test',
@@ -53,6 +64,21 @@ describe('ArvoMcpToolsetHandler', () => {
         add: { sum: 5 },
       });
       expect(result[0].executionunits).toBe(1);
+    });
+
+    it('should process single tool with additional cost request', async () => {
+      const event = createArvoEventFactory(testContract.version('1.0.0')).accepts({
+        source: 'com.test.test',
+        data: {
+          multiply: { a: 2, b: 3 },
+        },
+      });
+
+      const result = await handler.execute(event);
+      expect(result[0].data).toEqual({
+        multiply: { product: 6 },
+      });
+      expect(result[0].executionunits).toBe(3);
     });
 
     it('should process multiple tool requests', async () => {
@@ -73,7 +99,7 @@ describe('ArvoMcpToolsetHandler', () => {
     });
 
     it('should handle errors in any individual tools', async () => {
-      const handler = createArvoMcpToolsetHandler({
+      const handler = createArvoAgentToolsetHandler({
         contract: testContract,
         executionunits: 1,
         handler: {
@@ -97,12 +123,13 @@ describe('ArvoMcpToolsetHandler', () => {
       });
 
       const result = await handler.execute(event);
-      expect(result[0].type).toBe('sys.arvo.mcp.tools.test.tools.error');
+      expect(result[0].type).toBe('sys.arvo.agent.toolset.test.tools.error');
       expect(result[0].data.errorMessage).toBe("Tool 'add' execution failure: Add failed");
+      expect(result[0].executionunits).toBe(1);
     });
 
     it('should handle passthrough the violation errors in any individual tools', async () => {
-      const handler = createArvoMcpToolsetHandler({
+      const handler = createArvoAgentToolsetHandler({
         contract: testContract,
         executionunits: 1,
         handler: {

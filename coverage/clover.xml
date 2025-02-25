@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1740377914181" clover="3.2.0">
-  <project timestamp="1740377914181" name="All files">
-    <metrics statements="56" coveredstatements="50" conditionals="23" coveredconditionals="15" methods="25" coveredmethods="20" elements="104" coveredelements="85" complexity="0" loc="56" ncloc="56" packages="5" files="7" classes="7"/>
+<coverage generated="1740443563662" clover="3.2.0">
+  <project timestamp="1740443563662" name="All files">
+    <metrics statements="59" coveredstatements="53" conditionals="21" coveredconditionals="14" methods="26" coveredmethods="21" elements="106" coveredelements="88" complexity="0" loc="59" ncloc="59" packages="5" files="8" classes="8"/>
     <package name="src">
       <metrics statements="12" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="5"/>
       <file name="index.ts" path="/workspaces/arvo-agent/src/index.ts">
@@ -37,11 +37,11 @@
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="45" count="2" type="stmt"/>
-        <line num="57" count="8" type="stmt"/>
-        <line num="61" count="8" type="stmt"/>
-        <line num="65" count="16" type="stmt"/>
-        <line num="69" count="16" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="50" count="8" type="stmt"/>
+        <line num="54" count="8" type="stmt"/>
+        <line num="58" count="16" type="stmt"/>
+        <line num="62" count="16" type="stmt"/>
       </file>
     </package>
     <package name="src.event-handlers">
@@ -53,45 +53,51 @@
       </file>
     </package>
     <package name="src.event-handlers.toolset">
-      <metrics statements="33" coveredstatements="29" conditionals="19" coveredconditionals="12" methods="9" coveredmethods="9"/>
+      <metrics statements="36" coveredstatements="32" conditionals="17" coveredconditionals="11" methods="10" coveredmethods="10"/>
       <file name="helpers.ts" path="/workspaces/arvo-agent/src/event-handlers/toolset/helpers.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="48" count="3" type="stmt"/>
       </file>
       <file name="index.ts" path="/workspaces/arvo-agent/src/event-handlers/toolset/index.ts">
-        <metrics statements="30" coveredstatements="26" conditionals="19" coveredconditionals="12" methods="8" coveredmethods="8"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="14" count="3" type="cond" truecount="0" falsecount="1"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="19" count="3" type="cond" truecount="0" falsecount="1"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="25" count="3" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="28" count="4" type="stmt"/>
-        <line num="29" count="4" type="stmt"/>
-        <line num="32" count="4" type="stmt"/>
-        <line num="33" count="7" type="stmt"/>
-        <line num="36" count="7" type="cond" truecount="0" falsecount="1"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="41" count="7" type="stmt"/>
-        <line num="42" count="7" type="cond" truecount="0" falsecount="1"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="47" count="7" type="stmt"/>
-        <line num="53" count="5" type="stmt"/>
-        <line num="61" count="2" type="cond" truecount="1" falsecount="0"/>
-        <line num="62" count="1" type="stmt"/>
-        <line num="64" count="1" type="stmt"/>
-        <line num="70" count="3" type="cond" truecount="6" falsecount="2"/>
-        <line num="73" count="2" type="stmt"/>
-        <line num="122" count="2" type="stmt"/>
-        <line num="123" count="3" type="stmt"/>
-        <line num="124" count="3" type="cond" truecount="1" falsecount="1"/>
-        <line num="131" count="2" type="stmt"/>
+        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
+        <line num="43" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="50" count="2" type="stmt"/>
+      </file>
+      <file name="toolMapHandler.ts" path="/workspaces/arvo-agent/src/event-handlers/toolset/toolMapHandler.ts">
+        <metrics statements="27" coveredstatements="23" conditionals="15" coveredconditionals="10" methods="7" coveredmethods="7"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="13" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="17" count="3" type="cond" truecount="0" falsecount="1"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="24" count="6" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="26" count="6" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="30" count="8" type="stmt"/>
+        <line num="32" count="8" type="cond" truecount="0" falsecount="1"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="36" count="8" type="stmt"/>
+        <line num="37" count="8" type="cond" truecount="0" falsecount="1"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="42" count="8" type="stmt"/>
+        <line num="48" count="6" type="stmt"/>
+        <line num="50" count="2" type="cond" truecount="1" falsecount="0"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="58" count="4" type="stmt"/>
+        <line num="60" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="61" count="4" type="cond" truecount="7" falsecount="1"/>
+        <line num="64" count="4" type="stmt"/>
       </file>
     </package>
   </project>

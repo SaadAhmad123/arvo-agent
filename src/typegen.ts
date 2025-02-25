@@ -1,9 +1,9 @@
 /**
- * Base prefix for all MCP (Model Context Protocol) compliant event types
+ * Base prefix for all agentic event types
  */
-const prefix = 'arvo.mcp' as const;
+const prefix = 'arvo.agent' as const;
 
-const generateMcpTypeGen = <T extends string>(name: T) => {
+const generateAgentTypeGen = <T extends string>(name: T) => {
   const _prefix = `${prefix}.${name}` as const;
   const _initType = <T extends string>(name: T): `${typeof _prefix}.${T}` => `${_prefix}.${name}`;
 
@@ -18,10 +18,10 @@ const generateMcpTypeGen = <T extends string>(name: T) => {
 };
 
 /**
- * Pre-configured type generators for standard MCP domains.
+ * Pre-configured type generators for standard agentic domains.
  * Provides type-safe event type generation for tools and prompts.
  */
-export const ArvoMcpEventTypeGen = {
-  tools: generateMcpTypeGen('tools'),
-  prompts: generateMcpTypeGen('prompts'),
+export const ArvoAgentEventTypeGen = {
+  toolset: generateAgentTypeGen('toolset'),
+  promptset: generateAgentTypeGen('promptset'),
 } as const;

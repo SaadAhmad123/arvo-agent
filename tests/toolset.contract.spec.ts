@@ -1,10 +1,10 @@
 import { createArvoEventFactory } from 'arvo-core';
 import { z } from 'zod';
-import { createArvoMcpToolsetContract } from '../src/index';
-describe('ArvoMcpToolsetContract', () => {
+import { createArvoAgentToolsetContract } from '../src/index';
+describe('ArvoAgentToolsetContract', () => {
   const createTestContract = () =>
-    createArvoMcpToolsetContract({
-      uri: '#/mcp/test/test',
+    createArvoAgentToolsetContract({
+      uri: '#/agent/test/test',
       name: 'policy.rag',
       versions: {
         '1.0.0': {
@@ -24,9 +24,9 @@ describe('ArvoMcpToolsetContract', () => {
 
   it('should define the toolset contract', () => {
     const testContract = createTestContract();
-    expect(testContract.metadata.contractType).toBe('ArvoMcpToolsetContract');
-    expect(testContract.version('1.0.0').dataschema).toBe('#/mcp/test/test/1.0.0');
-    expect(testContract.version('1.0.0').accepts.type).toBe('arvo.mcp.tools.policy.rag');
+    expect(testContract.metadata.contractType).toBe('ArvoAgentToolsetContract');
+    expect(testContract.version('1.0.0').dataschema).toBe('#/agent/test/test/1.0.0');
+    expect(testContract.version('1.0.0').accepts.type).toBe('arvo.agent.toolset.policy.rag');
   });
 
   it('should successfully create the partial tool event', () => {
@@ -39,8 +39,8 @@ describe('ArvoMcpToolsetContract', () => {
         },
       },
     });
-    expect(toolEvent.type).toBe('arvo.mcp.tools.policy.rag');
-    expect(toolEvent.dataschema).toBe('#/mcp/test/test/1.0.0');
+    expect(toolEvent.type).toBe('arvo.agent.toolset.policy.rag');
+    expect(toolEvent.dataschema).toBe('#/agent/test/test/1.0.0');
     expect(toolEvent.data['get-weather']?.location).toBe('Washington');
     expect(toolEvent.data['celcius-to-kelvin']).not.toBeDefined();
   });
@@ -51,8 +51,8 @@ describe('ArvoMcpToolsetContract', () => {
       source: 'com.test.test',
       data: {},
     });
-    expect(toolEvent.type).toBe('arvo.mcp.tools.policy.rag');
-    expect(toolEvent.dataschema).toBe('#/mcp/test/test/1.0.0');
+    expect(toolEvent.type).toBe('arvo.agent.toolset.policy.rag');
+    expect(toolEvent.dataschema).toBe('#/agent/test/test/1.0.0');
     expect(toolEvent.data['get-weather']).not.toBeDefined();
     expect(toolEvent.data['celcius-to-kelvin']).not.toBeDefined();
   });
@@ -70,8 +70,8 @@ describe('ArvoMcpToolsetContract', () => {
         },
       },
     });
-    expect(toolEvent.type).toBe('arvo.mcp.tools.policy.rag');
-    expect(toolEvent.dataschema).toBe('#/mcp/test/test/1.0.0');
+    expect(toolEvent.type).toBe('arvo.agent.toolset.policy.rag');
+    expect(toolEvent.dataschema).toBe('#/agent/test/test/1.0.0');
     expect(toolEvent.data['get-weather']?.location).toBe('Washington');
     expect(toolEvent.data['celcius-to-kelvin']?.celcius).toBe(0);
   });
@@ -93,8 +93,8 @@ describe('ArvoMcpToolsetContract', () => {
         // biome-ignore lint/suspicious/noExplicitAny: Just testing
       } as any,
     });
-    expect(toolEvent.type).toBe('arvo.mcp.tools.policy.rag');
-    expect(toolEvent.dataschema).toBe('#/mcp/test/test/1.0.0');
+    expect(toolEvent.type).toBe('arvo.agent.toolset.policy.rag');
+    expect(toolEvent.dataschema).toBe('#/agent/test/test/1.0.0');
     expect(toolEvent.data['get-weather']?.location).toBe('Washington');
     expect(toolEvent.data['celcius-to-kelvin']?.celcius).toBe(0);
     // @ts-ignore
@@ -104,7 +104,7 @@ describe('ArvoMcpToolsetContract', () => {
   it('should create a partial complete emit event', () => {
     const testContract = createTestContract();
     const toolEvent = createArvoEventFactory(testContract.version('1.0.0')).emits({
-      type: 'arvo.mcp.tools.policy.rag.done',
+      type: 'arvo.agent.toolset.policy.rag.done',
       source: 'com.test.test',
       data: {
         'get-weather': {
@@ -112,8 +112,8 @@ describe('ArvoMcpToolsetContract', () => {
         },
       },
     });
-    expect(toolEvent.type).toBe('arvo.mcp.tools.policy.rag.done');
-    expect(toolEvent.dataschema).toBe('#/mcp/test/test/1.0.0');
+    expect(toolEvent.type).toBe('arvo.agent.toolset.policy.rag.done');
+    expect(toolEvent.dataschema).toBe('#/agent/test/test/1.0.0');
     expect(toolEvent.data['get-weather']?.temperature).toBe(12);
     expect(toolEvent.data['celcius-to-kelvin']?.kelvin).toBeUndefined();
   });
@@ -124,8 +124,8 @@ describe('ArvoMcpToolsetContract', () => {
       source: 'com.test.test',
       error: new Error('Something went wrong'),
     });
-    expect(toolEvent.type).toBe('sys.arvo.mcp.tools.policy.rag.error');
-    expect(toolEvent.dataschema).toBe('#/mcp/test/test/0.0.0');
+    expect(toolEvent.type).toBe('sys.arvo.agent.toolset.policy.rag.error');
+    expect(toolEvent.dataschema).toBe('#/agent/test/test/0.0.0');
     expect(toolEvent.data.errorMessage).toBe('Something went wrong');
   });
 });

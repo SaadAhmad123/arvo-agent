@@ -1,3 +1,3 @@
-export { ArvoMcpToolsetContract, createArvoMcpToolsetContract } from './contracts';
-export { ArvoMcpEventTypeGen } from './typegen';
-export { createArvoMcpToolsetHandler, ArvoMcpToolsetHandler, IArvoMcpToolsetHandler } from './event-handlers';
+export { ArvoAgentToolsetContract, createArvoAgentToolsetContract } from './contracts';
+export { ArvoAgentEventTypeGen } from './typegen';
+export { createArvoAgentToolsetHandler, ArvoAgentToolsetHandler, IArvoAgentToolsetHandler } from './event-handlers';

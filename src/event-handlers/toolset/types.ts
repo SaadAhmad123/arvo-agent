@@ -2,10 +2,10 @@ import type { Span, SpanOptions } from '@opentelemetry/api';
 import type { ArvoSemanticVersion, InferVersionedArvoContract, VersionedArvoContract } from 'arvo-core';
 import type { ArvoEventHandlerFunction } from 'arvo-event-handler';
 import type { z } from 'zod';
-import type { ArvoMcpToolsetContract } from '../../contracts';
+import type { ArvoAgentToolsetContract } from '../../contracts';
 
 /**
- * Defines the structure of a handler for MCP-compliant tools within a toolset.
+ * Defines the structure of a handler for Agentic tools within a toolset.
  * This type ensures that each tool in the toolset has a corresponding handler
  * that respects the contract's type definitions and versioning.
  *
@@ -13,7 +13,7 @@ import type { ArvoMcpToolsetContract } from '../../contracts';
  *
  * @example
  * ```typescript
- * const documentHandler: ArvoMcpToolHandler<DocumentToolsContract> = {
+ * const documentHandler: ArvoAgentToolHandler<DocumentToolsContract> = {
  *   "1.0.0": {
  *     extract: async ({ data }) => {
  *       const text = await processDocument(data);
@@ -27,7 +27,7 @@ import type { ArvoMcpToolsetContract } from '../../contracts';
  * };
  * ```
  */
-export type ArvoMcpToolHandlerMap<TContract extends ArvoMcpToolsetContract> = {
+export type ArvoAgentToolHandlerMap<TContract extends ArvoAgentToolsetContract> = {
   [V in ArvoSemanticVersion & keyof TContract['versions']]: {
     [T in keyof z.infer<TContract['versions'][V]['accepts']> & string]: (param: {
       /** The input data for this specific tool */
@@ -46,21 +46,18 @@ export type ArvoMcpToolHandlerMap<TContract extends ArvoMcpToolsetContract> = {
 };
 
 /**
- * Interface for a toolset handler that implements an MCP-compliant toolset contract.
- * This handler manages the execution of tools within a service boundary, providing
- * both event-driven capabilities through Arvo and MCP compatibility.
+ * Interface for a toolset handler that implements an Agentic toolset contract.
  */
-export interface IArvoMcpToolsetHandler<TContract extends ArvoMcpToolsetContract> {
+export interface IArvoAgentToolsetHandler<TContract extends ArvoAgentToolsetContract> {
   /**
    * The contract for the handler defining its input and outputs as well as the description.
    */
   contract: TContract;
 
   /**
-   * The default execution cost of the function.
-   * This can represent a dollar value or some other number with a rate card.
-   * If the tools are handler as a map, then the default cost
-   * of each tool invocation is this execution units
+   * The base execution cost of the handler. Any additional tool specific cost
+   * can be returned in the tool `__executionunits` field and it will
+   * be accumulated.
    */
   executionunits: number;
 
@@ -81,13 +78,13 @@ export interface IArvoMcpToolsetHandler<TContract extends ArvoMcpToolsetContract
    *     // Custom routing and processing
    *     switch(event.data.tool) {
    *       case 'summarize':
-   *         return { type: 'arvo.mcp.tools.<tool name>.done', data: await summarize(event.data) };
+   *         return { type: 'arvo.agent.toolset.<tool name>.done', data: await summarize(event.data) };
    *     }
    *   }
    * }
    * ```
    *
-   * 2. Tool Handler Pattern (ArvoMcpToolHandler):
+   * 2. Tool Handler Pattern (ArvoAgentToolHandler):
    * - Type-safe implementation of tools
    * - Compiler ensures all tools are implemented
    * - Automatic tool routing and event generation
@@ -98,7 +95,10 @@ export interface IArvoMcpToolsetHandler<TContract extends ArvoMcpToolsetContract
    * handler: {
    *   "1.0.0": {
    *     summarize: async ({ data }) => {
-   *       return await summarize(data);
+   *       return {
+   *          ...(await summarize(data)),
+   *          __executionunits: 2
+   *       };
    *     },
    *     classify: async ({ data }) => {
    *       return await classify(data);
@@ -111,7 +111,7 @@ export interface IArvoMcpToolsetHandler<TContract extends ArvoMcpToolsetContract
    * - Use Tool Handler for standard tool implementations with strong type safety
    * - Use Event Handler when you need custom event handling or complex routing logic
    */
-  handler: ArvoEventHandlerFunction<TContract> | ArvoMcpToolHandlerMap<TContract>;
+  handler: ArvoEventHandlerFunction<TContract> | ArvoAgentToolHandlerMap<TContract>;
 
   /**
    * The OpenTelemetry span options

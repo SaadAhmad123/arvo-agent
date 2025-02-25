@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/event-handlers/toolset/index.ts</title>
+    <title>Code coverage report for src/event-handlers/toolset/toolMapHandler.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../../prettify.css" />
     <link rel="stylesheet" href="../../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/event-handlers/toolset</a> index.ts</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">src/event-handlers/toolset</a> toolMapHandler.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">89.18% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/11</span>
+                <span class='fraction'>33/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/2</span>
+                <span class='fraction'>10/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">85.18% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>23/27</span>
             </div>
         
             
@@ -113,106 +113,172 @@
 <a name='L48'></a><a href='#L48'>48</a>
 <a name='L49'></a><a href='#L49'>49</a>
 <a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ArvoEventHandler } from 'arvo-event-handler';
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { ArvoEvent, ArvoSemanticVersion, ViolationError } from 'arvo-core';
+import type { ArvoEventHandlerFunction } from 'arvo-event-handler';
 import type { ArvoAgentToolsetContract } from '../../contracts';
-import type { IArvoAgentToolsetHandler } from './types';
-import { getToolMapHandler } from './toolMapHandler';
+import type { IArvoAgentToolsetHandler, ArvoAgentToolHandlerMap } from './types';
+import type { Span } from '@opentelemetry/api';
 &nbsp;
-/**
- * ArvoAgentToolsetHandler manages the execution of tools used by an agent within Arvo's event-driven architecture.
- *
- * @example Using Tool Handler pattern:
- * ```typescript
- * const documentHandler = createArvoAgentToolsetHandler({
- *   contract: documentContract,
- *   executionunits: 1,
- *   handler: {
- *     "1.0.0": {
- *       extractText: async ({ data }) =&gt; {
- *         return { text: await processDocument(data) };
- *       },
- *       summarize: async ({ data }) =&gt; {
- *         return { summary: await generateSummary(data) };
- *       }
- *     }
- *   }
- * });
- * ```
- *
- * @example Using Event Handler pattern:
- * ```typescript
- * const documentHandler = createArvoAgentToolsetHandler({
- *   contract: documentContract,
- *   executionunits: 1,
- *   handler: {
- *     "1.0.0": async ({ event }) =&gt; {
- *       // Custom routing logic
- *       return handleDocumentEvent(event);
- *     }
- *   }
- * });
- * ```
- */
-export class ArvoAgentToolsetHandler&lt;TContract extends ArvoAgentToolsetContract&gt; extends ArvoEventHandler&lt;TContract&gt; {
-  constructor({ contract, handler, executionunits, spanOptions }: IArvoAgentToolsetHandler&lt;TContract&gt;) {
-    super({
-      contract: contract,
-      executionunits: executionunits,
-      spanOptions: spanOptions,
-      handler: getToolMapHandler(contract, handler, executionunits),
-    })<span class="branch-1 cbranch-no" title="branch not covered" >;</span>
+export const getToolMapHandler = &lt;TContract extends ArvoAgentToolsetContract&gt;(
+  contract: TContract,
+  handler: IArvoAgentToolsetHandler&lt;TContract&gt;['handler'],
+  baseExecutionUnits: number,
+): ArvoEventHandlerFunction&lt;TContract&gt; =&gt; {
+  const firstVersion = Object.keys(handler)[0] as ArvoSemanticVersion | undefined;
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (!firstVersion) {
+<span class="cstat-no" title="statement not covered" >    throw Error(`Contract ${contract.uri} requires handler implementation of at least 1 version`);</span>
   }
-}
+&nbsp;
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof handler[firstVersion] === 'function') {
+<span class="cstat-no" title="statement not covered" >    return handler as ArvoEventHandlerFunction&lt;TContract&gt;;</span>
+  }
+&nbsp;
+  return Object.fromEntries(
+    Object.entries(handler as ArvoAgentToolHandlerMap&lt;TContract&gt;).map(([version, tools]) =&gt; [
+      version,
+      async ({ event, span }: { event: ArvoEvent; span: Span }) =&gt; {
+        const availableTools = Object.keys(tools);
+        const requestedTools = Object.keys(event.data);
+&nbsp;
+        // Execute all requested tools in parallel
+        let results = await Promise.all(
+          requestedTools.map(async (toolName) =&gt; {
+            try {
+              <span class="missing-if-branch" title="if path not taken" >I</span>if (!availableTools.includes(toolName)) {
+<span class="cstat-no" title="statement not covered" >                throw new Error(`Tool '${toolName}' not found. Available tools: ${availableTools.join(', ')}`);</span>
+              }
+&nbsp;
+              const tool = tools[toolName];
+              <span class="missing-if-branch" title="if path not taken" >I</span>if (!event.data[toolName]) {
+<span class="cstat-no" title="statement not covered" >                return [toolName, null];</span>
+              }
+&nbsp;
+              // Execute tool
+              const result = await tool({
+                data: event.data[toolName],
+                event,
+                span,
+              });
+&nbsp;
+              return [toolName, result];
+            } catch (error) {
+              if ((error as ViolationError).name.includes('ViolationError')) {
+                throw error;
+              }
+              throw new Error(`Tool '${toolName}' execution failure: ${(error as Error).message}`);
+            }
+          }),
+        );
+&nbsp;
+        results = results.filter((item) =&gt; Boolean(item[1]));
+&nbsp;
+        const executionunits = results.length
+          ? results.reduce((total, [_, result]) =&gt; total + (result<span class="branch-0 cbranch-no" title="branch not covered" >?._</span>_executionunits ?? 0), baseExecutionUnits)
+          : baseExecutionUnits;
+&nbsp;
+        return {
+          type: contract.metadata.completeEventType,
+          data: Object.fromEntries(results),
+          executionunits,
+        };
+      },
+    ]),
+  ) as unknown as ArvoEventHandlerFunction&lt;TContract&gt;;
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
