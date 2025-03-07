@@ -1,14 +1,14 @@
-import { ArvoAgentToolsetHandler } from './index';
 import type { ArvoAgentToolsetContract } from '../../contracts';
-import type { IArvoAgentToolsetHandler } from './types';
+import { ArvoAgentToolset } from './index';
+import type { IArvoAgentToolset } from './types';
 
 /**
- * Creates a new ArvoAgentToolsetHandler instance with a simplified factory pattern.
+ * Creates a new ArvoAgentToolset instance with a simplified factory pattern.
  * The handler can be created using either the Tool Handler or Event Handler pattern:
  *
  * @example Tool Handler Pattern - Direct tool implementation with type safety
  * ```typescript
- * const documentHandler = createArvoAgentToolsetHandler({
+ * const documentHandler = createArvoAgentToolset({
  *   contract: documentContract,
  *   executionunits: 1,
  *   handler: {
@@ -26,7 +26,7 @@ import type { IArvoAgentToolsetHandler } from './types';
  *
  * @example Event Handler Pattern - Custom event processing
  * ```typescript
- * const documentHandler = createArvoAgentToolsetHandler({
+ * const documentHandler = createArvoAgentToolset({
  *   contract: documentContract,
  *   executionunits: 1,
  *   handler: {
@@ -41,8 +41,8 @@ import type { IArvoAgentToolsetHandler } from './types';
  * @template TContract - The toolset contract type that defines the tools' interfaces
  * @param param - Configuration object for the handler including contract,
  *                implementation, execution units, and optional monitoring settings
- * @returns A new instance of ArvoAgentToolsetHandler configured with the provided parameters
+ * @returns A new instance of ArvoAgentToolset configured with the provided parameters
  */
-export const createArvoAgentToolsetHandler = <TContract extends ArvoAgentToolsetContract>(
-  param: IArvoAgentToolsetHandler<TContract>,
-) => new ArvoAgentToolsetHandler<TContract>(param);
+export const createArvoAgentToolset = <TContract extends ArvoAgentToolsetContract>(
+  param: IArvoAgentToolset<TContract>,
+) => new ArvoAgentToolset<TContract>(param);

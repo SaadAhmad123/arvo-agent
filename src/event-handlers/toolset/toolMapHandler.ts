@@ -1,12 +1,12 @@
+import type { Span } from '@opentelemetry/api';
 import type { ArvoEvent, ArvoSemanticVersion, ViolationError } from 'arvo-core';
 import type { ArvoEventHandlerFunction } from 'arvo-event-handler';
 import type { ArvoAgentToolsetContract } from '../../contracts';
-import type { IArvoAgentToolsetHandler, ArvoAgentToolHandlerMap } from './types';
-import type { Span } from '@opentelemetry/api';
+import type { ArvoAgentToolHandlerMap, IArvoAgentToolset } from './types';
 
 export const getToolMapHandler = <TContract extends ArvoAgentToolsetContract>(
   contract: TContract,
-  handler: IArvoAgentToolsetHandler<TContract>['handler'],
+  handler: IArvoAgentToolset<TContract>['handler'],
   baseExecutionUnits: number,
 ): ArvoEventHandlerFunction<TContract> => {
   const firstVersion = Object.keys(handler)[0] as ArvoSemanticVersion | undefined;

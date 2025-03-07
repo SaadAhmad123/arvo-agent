@@ -1,14 +1,14 @@
 import { ArvoEventHandler } from 'arvo-event-handler';
 import type { ArvoAgentToolsetContract } from '../../contracts';
-import type { IArvoAgentToolsetHandler } from './types';
 import { getToolMapHandler } from './toolMapHandler';
+import type { IArvoAgentToolset } from './types';
 
 /**
- * ArvoAgentToolsetHandler manages the execution of tools used by an agent within Arvo's event-driven architecture.
+ * ArvoAgentToolset manages the execution of tools used by an agent within Arvo's event-driven architecture.
  *
  * @example Using Tool Handler pattern:
  * ```typescript
- * const documentHandler = createArvoAgentToolsetHandler({
+ * const documentHandler = createArvoAgentToolset({
  *   contract: documentContract,
  *   executionunits: 1,
  *   handler: {
@@ -26,7 +26,7 @@ import { getToolMapHandler } from './toolMapHandler';
  *
  * @example Using Event Handler pattern:
  * ```typescript
- * const documentHandler = createArvoAgentToolsetHandler({
+ * const documentHandler = createArvoAgentToolset({
  *   contract: documentContract,
  *   executionunits: 1,
  *   handler: {
@@ -38,8 +38,8 @@ import { getToolMapHandler } from './toolMapHandler';
  * });
  * ```
  */
-export class ArvoAgentToolsetHandler<TContract extends ArvoAgentToolsetContract> extends ArvoEventHandler<TContract> {
-  constructor({ contract, handler, executionunits, spanOptions }: IArvoAgentToolsetHandler<TContract>) {
+export class ArvoAgentToolset<TContract extends ArvoAgentToolsetContract> extends ArvoEventHandler<TContract> {
+  constructor({ contract, handler, executionunits, spanOptions }: IArvoAgentToolset<TContract>) {
     super({
       contract: contract,
       executionunits: executionunits,

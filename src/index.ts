@@ -1,3 +1,8 @@
-export { ArvoAgentToolsetContract, createArvoAgentToolsetContract } from './contracts';
+export {
+  ArvoAgentToolsetContract,
+  createArvoAgentToolsetContract,
+  createArvoAgentContract,
+  ArvoAgentContract,
+} from './contracts';
 export { ArvoAgentEventTypeGen } from './typegen';
-export { createArvoAgentToolsetHandler, ArvoAgentToolsetHandler, IArvoAgentToolsetHandler } from './event-handlers';
+export { createArvoAgentToolset, ArvoAgentToolset, IArvoAgentToolset } from './event-handlers';

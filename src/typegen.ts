@@ -1,7 +1,7 @@
 /**
  * Base prefix for all agentic event types
  */
-const prefix = 'arvo.agent' as const;
+const prefix = 'arvo' as const;
 
 const generateAgentTypeGen = <T extends string>(name: T) => {
   const _prefix = `${prefix}.${name}` as const;
@@ -22,6 +22,7 @@ const generateAgentTypeGen = <T extends string>(name: T) => {
  * Provides type-safe event type generation for tools and prompts.
  */
 export const ArvoAgentEventTypeGen = {
-  toolset: generateAgentTypeGen('toolset'),
-  promptset: generateAgentTypeGen('promptset'),
+  toolset: generateAgentTypeGen('agent.toolset'),
+  promptset: generateAgentTypeGen('agent.promptset'),
+  agent: generateAgentTypeGen('agent'),
 } as const;

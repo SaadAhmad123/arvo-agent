@@ -1,7 +1,7 @@
-import { z } from 'zod';
-import { createArvoAgentToolsetContract, createArvoAgentToolsetHandler } from '../src';
 import { createArvoEventFactory } from 'arvo-core';
 import { ExecutionViolation } from 'arvo-event-handler';
+import { z } from 'zod';
+import { createArvoAgentToolsetContract, createArvoAgentToolset } from '../src';
 
 describe('ArvoAgentToolsetHandler', () => {
   const testContract = createArvoAgentToolsetContract({
@@ -24,7 +24,7 @@ describe('ArvoAgentToolsetHandler', () => {
   });
 
   describe('Tool Handler Pattern', () => {
-    const handler = createArvoAgentToolsetHandler({
+    const handler = createArvoAgentToolset({
       contract: testContract,
       executionunits: 1,
       handler: {
@@ -99,7 +99,7 @@ describe('ArvoAgentToolsetHandler', () => {
     });
 
     it('should handle errors in any individual tools', async () => {
-      const handler = createArvoAgentToolsetHandler({
+      const handler = createArvoAgentToolset({
         contract: testContract,
         executionunits: 1,
         handler: {
@@ -129,7 +129,7 @@ describe('ArvoAgentToolsetHandler', () => {
     });
 
     it('should handle passthrough the violation errors in any individual tools', async () => {
-      const handler = createArvoAgentToolsetHandler({
+      const handler = createArvoAgentToolset({
         contract: testContract,
         executionunits: 1,
         handler: {

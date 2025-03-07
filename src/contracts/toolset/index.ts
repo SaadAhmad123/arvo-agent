@@ -1,4 +1,5 @@
 import { createArvoContract } from 'arvo-core';
+import { isLowerAlphanumeric } from 'arvo-event-handler/dist/utils';
 import { z } from 'zod';
 import { ArvoAgentEventTypeGen } from '../../typegen';
 import type { ArvoAgentToolsetContract, ArvoAgentToolsetContractVersionRecord } from './types';
@@ -46,16 +47,36 @@ export const createArvoAgentToolsetContract = <
   name: TName;
   versions: TVersions;
   metadata?: TMetaData;
-}) =>
-  createArvoContract({
+}) => {
+  if (!isLowerAlphanumeric(param.name)) {
+    throw new Error(
+      `Invalid 'name' = '${param.name}'. The 'name' must only contain alphanumeric characters. e.g. test.toolset`,
+    );
+  }
+
+  const mergedMetaData = {
+    ...(param.metadata ?? {}),
+    contractType: 'ArvoAgentToolsetContract' as const,
+    rootType: param.name,
+    initEventType: ArvoAgentEventTypeGen.toolset.init(param.name),
+    completeEventType: ArvoAgentEventTypeGen.toolset.complete(param.name),
+    versions: param.versions,
+  };
+
+  return createArvoContract({
     uri: param.uri,
     type: ArvoAgentEventTypeGen.toolset.init(param.name),
+    metadata: mergedMetaData,
     versions: Object.fromEntries(
       Object.entries(param.versions).map(([version, item]) => [
         version,
         {
           accepts: z
-            .object(Object.fromEntries(Object.entries(item).map(([tool, { accepts }]) => [tool, accepts])))
+            .object(
+              Object.fromEntries(
+                Object.entries(item).map(([tool, { accepts, description }]) => [tool, accepts.describe(description)]),
+              ),
+            )
             .partial(),
           emits: {
             [ArvoAgentEventTypeGen.toolset.complete(param.name)]: z
@@ -65,12 +86,5 @@ export const createArvoAgentToolsetContract = <
         },
       ]),
     ),
-    metadata: {
-      ...(param.metadata ?? {}),
-      contractType: 'ArvoAgentToolsetContract' as const,
-      rootType: param.name,
-      initEventType: ArvoAgentEventTypeGen.toolset.init(param.name),
-      completeEventType: ArvoAgentEventTypeGen.toolset.complete(param.name),
-      versions: param.versions,
-    },
   }) as unknown as ArvoAgentToolsetContract<TUri, TName, TVersions, TMetaData>;
+};

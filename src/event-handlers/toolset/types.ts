@@ -48,7 +48,7 @@ export type ArvoAgentToolHandlerMap<TContract extends ArvoAgentToolsetContract> 
 /**
  * Interface for a toolset handler that implements an Agentic toolset contract.
  */
-export interface IArvoAgentToolsetHandler<TContract extends ArvoAgentToolsetContract> {
+export interface IArvoAgentToolset<TContract extends ArvoAgentToolsetContract> {
   /**
    * The contract for the handler defining its input and outputs as well as the description.
    */

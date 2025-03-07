@@ -1,3 +1,3 @@
-export { ArvoAgentToolsetHandler } from './toolset';
-export type { IArvoAgentToolsetHandler, ArvoAgentToolHandlerMap } from './toolset/types';
-export { createArvoAgentToolsetHandler } from './toolset/helpers';
+export { ArvoAgentToolset } from './toolset';
+export type { IArvoAgentToolset, ArvoAgentToolHandlerMap } from './toolset/types';
+export { createArvoAgentToolset } from './toolset/helpers';
